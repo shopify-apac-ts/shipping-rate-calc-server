@@ -3,12 +3,12 @@ import {json, redirect} from '@shopify/remix-oxygen';
 export async function action({request, context}) {
   const {session, storefront} = context;
 
-  if (request.method !== 'POST') {
-    return json({error: 'Method not allowed'}, {status: 405});
-  }
+//  if (request.method !== 'POST') {
+//    return json({error: 'Method not allowed'}, {status: 405});
+//  }
 
   const body = await request.formData();
-  console.log("ACTION: request", request);
+  console.log("/callback ACTION: request", request);
   console.log("body", body);
 
   const shippingRates = { 
@@ -34,7 +34,7 @@ export async function action({request, context}) {
 
 export async function loader({context}) {
 
-  console.log("LOADER: context", context);
+  console.log("/callback LOADER: context", context);
 
   const loaderResponse = {"message": "loader handled this request"};
   return json(loaderResponse, {status: 200});
