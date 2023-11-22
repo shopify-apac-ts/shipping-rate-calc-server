@@ -12,20 +12,16 @@ export async function action({request, context}) {
 //  console.log("requestJson", requestJson);
   console.log("origin", JSON.stringify(requestJson.rate?.origin));
   console.log("destination", JSON.stringify(requestJson.rate?.destination));
-  console.log("items", JSON.stringify(requestJson.rate?.items));
-
-  let total_price = 0;
-  const items = requestJson.rate?.items;
-  if (items === null) {
-    console.log("items is null");
+//  console.log("items", JSON.stringify(requestJson.rate?.items));
+  const items = length(requestJson.rate?.items);
+  var total_price = 0;
+  console.log("item_count", items);
+  for(var i = 0; i < items; i++) {
+    console.log("item", JSON.stringify(requestJson.rate?.items[i]));
+    total_price += requestJson.rate?.items[i].price;
   }
-  else {
-    for (price in items) {
-      total_price += price;
-    }
-  }
-  console.log("price", total_price);
-
+  console.log("total_price", total_price);
+  
   const rates = [ 
     { 
       service_name: "canadapost-air", 
