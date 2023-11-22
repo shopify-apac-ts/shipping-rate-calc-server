@@ -32,9 +32,13 @@ export async function action({request, context}) {
   return json({shippingRates}, {status: 200});
 }
 
-export async function loader({context}) {
+export async function loader({request, context}) {
 
   console.log("/callback LOADER: context", context);
+
+  const body = await request.formData();
+  console.log("/callback ACTION: request", request);
+  console.log("body", body);
 
   const loaderResponse = {"message": "loader handled this request"};
   return json(loaderResponse, {status: 200});
