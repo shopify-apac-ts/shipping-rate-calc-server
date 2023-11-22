@@ -40,8 +40,10 @@ export async function action({request, context}) {
       total_price: `${shippingPriceA}`, 
       description: "This is the fastest option by far", 
       currency: "JPY", 
-      min_delivery_date: "2023-12-10 14:48:45 +0900", 
-      max_delivery_date: "2023-12-20 14:48:45 +0900" 
+      min_delivery_date: "2023-12-10T14:48:45.123Z", 
+      max_delivery_date: "2023-12-20T14:48:45.123Z" 
+//      min_delivery_date: "2023-12-10 14:48:45 +0900", 
+//      max_delivery_date: "2023-12-20 14:48:45 +0900" 
     }, { 
       service_name: "REGULAR - 10%", 
       service_code: "2D", 
