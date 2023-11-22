@@ -21,7 +21,7 @@ export async function loader({context}) {
       service_discovery: true
     }
   });
-  console.log("body", body);
+  console.log("bodyString", body);
 
   var response;
   try {
