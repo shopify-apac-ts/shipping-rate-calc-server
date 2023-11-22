@@ -4,9 +4,10 @@ import {json, redirect} from '@shopify/remix-oxygen';
 export async function action({request, context}) {
 
   console.log("/callback ACTION: context", context);
-
   console.log("/callback ACTION: request", request);
-  console.log("body", JSON.stringify(request.body));
+
+  const formData = await request.formData();
+  console.log("data", formData);
 
   const rates = [ 
     { 
