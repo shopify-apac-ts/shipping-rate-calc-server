@@ -13,13 +13,14 @@ export async function action({request, context}) {
 
   // Delivery Date Calculation
   const today = Date.now();
-  console.log("today", today);
-  const todayString = new Date(today).toISOString();
-  console.log("todayString", todayString);
-  const deliveryDate = today + 5 * 24 * 60 * 60 * 1000; // days later
-  console.log("deliveryDate", deliveryDate);
-  const deliveryDateString = new Date(deliveryDate).toISOString();
-  console.log("deliveryDateString", deliveryDateString);
+  console.log("today", new Date(today).toISOString());
+  const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+//  const todayString = new Date(today).toISOString();
+//  console.log("todayString", todayString);
+//  const deliveryDate = today + 5 * 24 * 60 * 60 * 1000; // days later
+//  console.log("deliveryDate", deliveryDate);
+//  const deliveryDateString = new Date(deliveryDate).toISOString();
+//  console.log("deliveryDateString", deliveryDateString);
 
   // Price Calculation
   const items = Object.keys(requestJson.rate?.items).length;
@@ -30,27 +31,29 @@ export async function action({request, context}) {
     total_price += (requestJson.rate?.items[i].price * requestJson.rate?.items[i].quantity);
   }
   console.log("total_price", total_price);
-  const shippingPriceA = total_price * 0.3; // 30% of total_price
-  const shippingPriceB = total_price * 0.1; // 10% of total_price
 
   const rates = [ 
     { 
       service_name: "PRIORITY HANDLING - 30%", 
       service_code: "ON", 
-      total_price: `${shippingPriceA}`, 
+      total_price: `${total_price * 0.3}`,  // 30% of total_price
       description: "This is the fastest option by far", 
       currency: "JPY", 
-      min_delivery_date: "2023-12-10T14:48:45.123Z", 
-      max_delivery_date: "2023-12-20T14:48:45.123Z" 
+      min_delivery_date: `${new Date(today + 2 * oneDay).toISOString()}`, 
+      max_delivery_date: `${new Date(today + 5 * oneDay).toISOString()}` 
+//      min_delivery_date: "2023-12-10T14:48:45.123Z", 
+//      max_delivery_date: "2023-12-20T14:48:45.123Z" 
 //      min_delivery_date: "2023-12-10 14:48:45 +0900", 
 //      max_delivery_date: "2023-12-20 14:48:45 +0900" 
     }, { 
       service_name: "REGULAR - 10%", 
       service_code: "2D", 
-      total_price: `${shippingPriceB}`, 
+      total_price: `${total_price * 0.1}`,  // 10% of total_price
       currency: "JPY", 
-      min_delivery_date: "2023-12-25 14:48:45 +0900", 
-      max_delivery_date: "2024-01-10 14:48:45 +0900" 
+      min_delivery_date: `${new Date(today + 15 * oneDay).toISOString()}`, 
+      max_delivery_date: `${new Date(today + 20 * oneDay).toISOString()}` 
+//      min_delivery_date: "2023-12-25 14:48:45 +0900", 
+//      max_delivery_date: "2024-01-10 14:48:45 +0900" 
     } 
   ];
 
