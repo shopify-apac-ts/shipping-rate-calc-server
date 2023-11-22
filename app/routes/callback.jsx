@@ -5,7 +5,10 @@ export async function action({request, context}) {
 
   console.log("/callback ACTION: context", context);
   console.log("/callback ACTION: request", request);
+
   const requestJson = await request.json();
+  console.log("origin", JSON.stringify(requestJson.rate?.origin));
+  console.log("destination", JSON.stringify(requestJson.rate?.destination));
 
   // Delivery Date Calculation
   const today = Date.now();
