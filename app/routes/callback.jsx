@@ -8,8 +8,11 @@ export async function action({request, context}) {
 
 //  const formData = await request.formData();
 //  console.log("data", formData);
-  const requestJson = await request.json();
+  const rrequestJson = await request.json();
   console.log("requestJson", requestJson);
+  console.log("origin", requestJson.rate?.origin);
+  console.log("destination", requestJson.rate?.destination);
+  console.log("items", requestJson.rate?.items);
 
   const rates = [ 
     { 
