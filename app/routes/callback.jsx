@@ -16,7 +16,7 @@ export async function action({request, context}) {
   console.log("item_count", items);
   for (var i = 0; i < items; i++) {
     console.log("item", JSON.stringify(requestJson.rate?.items[i]));
-    total_price += requestJson.rate?.items[i].price;
+    total_price += (requestJson.rate?.items[i].price * requestJson.rate?.items[i].quantity);
   }
   console.log("total_price", total_price);
   const shippingPriceA = total_price * 0.2; // 20% of total_price
