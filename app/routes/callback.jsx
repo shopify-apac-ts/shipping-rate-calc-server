@@ -6,8 +6,10 @@ export async function action({request, context}) {
   console.log("/callback ACTION: context", context);
   console.log("/callback ACTION: request", request);
 
-  const formData = await request.formData();
-  console.log("data", formData);
+//  const formData = await request.formData();
+//  console.log("data", formData);
+  const requestJson = await request.json();
+  console.log("requestJson", requestJson);
 
   const rates = [ 
     { 
