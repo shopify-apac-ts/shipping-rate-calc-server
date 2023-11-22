@@ -30,3 +30,8 @@ export async function action({request, context}) {
 
   return json({rates}, {status: 200});
 }
+
+export async function loader({context}) {
+  console.log("/callback LOADER: context", context);
+  return json({});
+}
