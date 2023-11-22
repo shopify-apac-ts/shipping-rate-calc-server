@@ -6,8 +6,7 @@ export async function action({request, context}) {
   console.log("/callback ACTION: context", context);
 
   console.log("/callback ACTION: request", request);
-  const body = await request.body?.json();
-  console.log("body", body);
+  console.log("body", request.body);
 
   const rates = [ 
     { 
