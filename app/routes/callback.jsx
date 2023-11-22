@@ -14,20 +14,17 @@ export async function action({request, context}) {
   console.log("destination", JSON.stringify(requestJson.rate?.destination));
   console.log("items", JSON.stringify(requestJson.rate?.items));
 
-  let grams = 0;
-  let price = 0;
+  let total_price = 0;
   const items = requestJson.rate?.items;
   if (items === null) {
     console.log("items is null");
   }
   else {
-    for (item in items) {
-      grams += item.grams;
-      price += item.price;
+    for (price in items) {
+      total_price += price;
     }
   }
-  console.log("grams", grams);
-  console.log("price", price);
+  console.log("price", total_price);
 
   const rates = [ 
     { 
