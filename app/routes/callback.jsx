@@ -6,26 +6,14 @@ export async function action({request, context}) {
   console.log("/callback ACTION: context", context);
   console.log("/callback ACTION: request", request);
   const requestJson = await request.json();
-//  console.log("requestJson", requestJson);
-//  console.log("origin", JSON.stringify(requestJson.rate?.origin));
-//  console.log("destination", JSON.stringify(requestJson.rate?.destination));
-//  console.log("items", JSON.stringify(requestJson.rate?.items));
 
   // Delivery Date Calculation
   const today = Date.now();
-  console.log("today", new Date(today).toISOString());
   const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-//  const todayString = new Date(today).toISOString();
-//  console.log("todayString", todayString);
-//  const deliveryDate = today + 5 * 24 * 60 * 60 * 1000; // days later
-//  console.log("deliveryDate", deliveryDate);
-//  const deliveryDateString = new Date(deliveryDate).toISOString();
-//  console.log("deliveryDateString", deliveryDateString);
 
   // Price Calculation
   const items = Object.keys(requestJson.rate?.items).length;
   var total_price = 0;
-  console.log("item_count", items);
   for (var i = 0; i < items; i++) {
     console.log("item", JSON.stringify(requestJson.rate?.items[i]));
     total_price += (requestJson.rate?.items[i].price * requestJson.rate?.items[i].quantity);
@@ -43,8 +31,6 @@ export async function action({request, context}) {
       max_delivery_date: `${new Date(today + 5 * oneDay).toISOString()}` 
 //      min_delivery_date: "2023-12-10T14:48:45.123Z", 
 //      max_delivery_date: "2023-12-20T14:48:45.123Z" 
-//      min_delivery_date: "2023-12-10 14:48:45 +0900", 
-//      max_delivery_date: "2023-12-20 14:48:45 +0900" 
     }, { 
       service_name: "REGULAR - 10%", 
       service_code: "2D", 
