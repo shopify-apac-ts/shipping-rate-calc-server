@@ -13,7 +13,7 @@ export async function action({request, context}) {
   console.log("origin", JSON.stringify(requestJson.rate?.origin));
   console.log("destination", JSON.stringify(requestJson.rate?.destination));
 //  console.log("items", JSON.stringify(requestJson.rate?.items));
-  const items = Object.keys(requestJson.rate?.items[0]).length;
+  const items = Object.keys(requestJson.rate?.items).length;
   var total_price = 0;
   console.log("item_count", items);
   for (var i = 0; i < items; i++) {
