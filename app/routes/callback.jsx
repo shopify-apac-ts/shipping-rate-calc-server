@@ -13,15 +13,15 @@ export async function action({request, context}) {
   console.log("origin", JSON.stringify(requestJson.rate?.origin));
   console.log("destination", JSON.stringify(requestJson.rate?.destination));
 //  console.log("items", JSON.stringify(requestJson.rate?.items));
-  const items = length(requestJson.rate?.items);
+  const items = Object.keys(requestJson.rate?.items[0]).length;
   var total_price = 0;
   console.log("item_count", items);
-  for(var i = 0; i < items; i++) {
+  for (var i = 0; i < items; i++) {
     console.log("item", JSON.stringify(requestJson.rate?.items[i]));
     total_price += requestJson.rate?.items[i].price;
   }
   console.log("total_price", total_price);
-  
+
   const rates = [ 
     { 
       service_name: "canadapost-air", 
