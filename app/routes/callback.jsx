@@ -12,14 +12,14 @@ export async function action({request, context}) {
 //  console.log("items", JSON.stringify(requestJson.rate?.items));
 
   // Delivery Date Calculation
-  const today = new Date();
-  console.log("today", today.toISOString());
-  const deliveryDateA_min = today + 5 * 24 * 60 * 60 * 1000; // days later
-  const deliveryDateA_max = today + 8 * 24 * 60 * 60 * 1000; // days later
-  console.log("deliveryDateA_min", deliveryDateA_min.toISOString());
-  console.log("deliveryDateA_max", deliveryDateA_max.toISOString());
-  const deliveryDateB_min = today + 15 * 24 * 60 * 60 * 1000; // days later
-  const deliveryDateB_max = today + 30 * 24 * 60 * 60 * 1000; // days later
+  const today = Date.now();
+  console.log("today", today);
+  const todayString = new Date(today).toISOString();
+  console.log("todayString", todayString);
+  const deliveryDate = today + 5 * 24 * 60 * 60 * 1000; // days later
+  console.log("deliveryDate", deliveryDate);
+  const deliveryDateString = new Date(deliveryDate).toISOString();
+  console.log("deliveryDateString", deliveryDateString);
 
   // Price Calculation
   const items = Object.keys(requestJson.rate?.items).length;
