@@ -9,14 +9,29 @@ export async function action({request, context}) {
 //  const formData = await request.formData();
 //  console.log("data", formData);
   const requestJson = await request.json();
-  console.log("requestJson", requestJson);
-  console.log("origin", requestJson.rate?.origin);
-  console.log("destination", requestJson.rate?.destination);
-  console.log("items", requestJson.rate?.items);
+//  console.log("requestJson", requestJson);
+  console.log("origin", JSON.stringify(requestJson.rate?.origin));
+  console.log("destination", JSON.stringify(requestJson.rate?.destination));
+  console.log("items", JSON.stringify(requestJson.rate?.items));
+
+  let grams = 0;
+  let price = 0;
+  const items = requestJson.rate?.items;
+  if (items === null) {
+    console.log("items is null");
+  }
+  else {
+    for (item in items) {
+      grams += item.grams;
+      price += item.price;
+    }
+  }
+  console.log("grams", grams);
+  console.log("price", price);
 
   const rates = [ 
     { 
-      service_name: "canadapost-overnight", 
+      service_name: "canadapost-air", 
       service_code: "ON", 
       total_price: "129500", 
       description: "This is the fastest option by far", 
@@ -24,7 +39,7 @@ export async function action({request, context}) {
       min_delivery_date: "2023-12-10 14:48:45 +0900", 
       max_delivery_date: "2023-12-20 14:48:45 +0900" 
     }, { 
-      service_name: "fedex-2dayground", 
+      service_name: "fedex-ground", 
       service_code: "2D", 
       total_price: "293400", 
       currency: "JPY", 
